@@ -18,14 +18,11 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../src/config/firebaseConfig';
 import { router } from 'expo-router';
 
-import { doc, setDoc } from 'firebase/firestore';
-import { db } from '../src/config/firebaseConfig';
 export default function CadastroScreen() {
-
   // 📌 QUESTÃO 2 - Estados para dados do usuário
   // Crie estados para armazenar os dados do formulário
   
-  // Dados pessoais - nome, email, senha, confirmarSenha
+  // Dados PRODUTO -
   const[nome, setNome] = useState('');
 const [email, setEmail] = useState('');
 const[senha, setSenha] = useState('');
@@ -171,14 +168,14 @@ const[estado, setEstado] = useState('');
       // 🛠️ IMPLEMENTE AQUI
       // Use createUserWithEmailAndPassword do Firebase
       // Passa: auth, email, senha
-      const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
-       const user = userCredential.user;
+      await createUserWithEmailAndPassword(auth, email, senha);
 
-      await setDoc(doc(db, 'usuarios', user.uid), { nome: nome, email: email, endereco: { cep: cep, logradouro: logradouro, numero: numero, complemento: complemento, bairro: bairro, cidade: cidade, estado: estado, }, criadoEm: new Date().toISOString(), });
+
+
       // Sucesso! Aqui você poderia salvar os dados de endereço em um banco de dados
       // Por enquanto, vamos apenas mostrar mensagem e redirecionar
       
-      console.log('Usuário cadastrado com sucesso!');
+      console.log('usuario cadastrado com sucesso!');
       console.log('Endereço:', { cep, logradouro, numero, complemento, bairro, cidade, estado });
       
       setMensagem('Cadastro realizado com sucesso!');
